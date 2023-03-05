@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using portal.Domain;
 using portal.IO.Provider;
 using portal.Security;
 using portal.Security.Identity;
@@ -22,6 +23,9 @@ namespace portal.Service
             //DBContexts
             builder.Services.AddDbContext<SecurityDbContext>(options => options.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly("portal.Security.Identity")));
+
+            builder.Services.AddDbContext<PortalDbContext>(options => options.UseSqlServer(connectionString,
+                b => b.MigrationsAssembly("portal.Domain")));
 
             // For Identity
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()
