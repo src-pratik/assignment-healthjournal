@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h1>Jornal Portal</h1>
+        <div style="margin-left: 30px;">
+            <a *ngIf="isUserAuthenticated()" mat-button [routerLink]="'/journal-list'"> Home </a>
+            <a *ngIf="isRole('User')" mat-button [routerLink]="'/journal-subscriptions'"> Subscriptions </a>
+            <a *ngIf="isRole('Publisher')" mat-button [routerLink]="'/journal-publications'"> Publications </a>
+        </div>
+        <span style="flex: 1 1 auto"></span>
+        <div *ngIf="!isUserAuthenticated()">
+            <a mat-button [routerLink]="'/login'"> Login </a>
+        </div>
+        <div *ngIf="isUserAuthenticated()">
+            <a mat-button (click)="logOut()" [routerLink]="'/logout'"> Logout </a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

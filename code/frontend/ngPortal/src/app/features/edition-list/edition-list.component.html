@@ -1,0 +1,56 @@
+<div style="margin:50px;">
+    <mat-card style="width:100%;">
+        <mat-card-header>
+            <mat-card-title>{{getTitle()}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="!inProgress && !hasError">
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="createdOn">
+                        <th mat-header-cell *matHeaderCellDef> Released On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdOn | date:'fullDate'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-button color="primary" (click)="onViewClick(element.id)">View</button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="noRecord">
+                        <td mat-footer-cell *matFooterCellDef>No records found.</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <ng-template [ngIf]="dataSource.data.length === 0">
+                        <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
+                    </ng-template>
+                    <tr *ngIf="!dataSource">No records found</tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-toolbar-row>
+                <div *ngIf="inProgress" style="min-width: 100%;">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    The system is searching, loading the records to be viewed...
+                </div>
+                <div *ngIf="hasError" style="min-width: 100%;">
+                    Unable to load data from server. <br />
+                    <button mat-raised-button color="primary" (click)="loadDataSource()">
+                        <mat-icon>refresh</mat-icon> Retry
+                    </button>
+                </div>
+            </mat-toolbar-row>
+            <mat-toolbar-row *ngIf="!inProgress">
+                <span style="flex: 1 1 auto"></span>
+                <button mat-raised-button color="primary" (click)="onBackClick()">
+                    <mat-icon>arrow_back</mat-icon> Back
+                </button>
+            </mat-toolbar-row>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

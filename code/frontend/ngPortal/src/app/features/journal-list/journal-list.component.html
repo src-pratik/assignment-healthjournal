@@ -1,0 +1,79 @@
+<div style="margin:50px;">
+    <mat-card style="width:100%;">
+        <mat-card-header>
+            <mat-toolbar-row>
+                <mat-card-title>{{getTitle()}}</mat-card-title>
+                <span style="flex: 1 1 auto"></span>
+                <button *ngIf="actionAllowNew()" mat-raised-button color="primary" (click)="onNewClick()">
+                    <mat-icon>add</mat-icon>New</button>
+            </mat-toolbar-row>
+
+        </mat-card-header>
+        <mat-card-content *ngIf="!inProgress && !hasError">
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdOn">
+                        <th mat-header-cell *matHeaderCellDef> Released On </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdOn | date:'fullDate'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="createdBy">
+                        <th mat-header-cell *matHeaderCellDef> Author </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+
+                            <button *ngIf="actionAllowSubscribe()" [disabled]="inProgressAction" mat-button
+                                color="primary" (click)="onSubscribeClick(element.id)">Subscribe</button>
+
+                            <button *ngIf="actionAllowViewEditions()" mat-button color="primary"
+                                (click)="onViewClick(element.id)">View</button>
+
+                            <button *ngIf="actionAllowUploadEditions()" mat-button color="primary"
+                                (click)="onUploadClick(element.id)">Publish</button>
+
+                            <!-- <button mat-icon-button color="primary" (click)="onUploadClick(element.id)">
+                                <mat-icon>publish</mat-icon>
+                            </button> -->
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="noRecord">
+                        <td mat-footer-cell *matFooterCellDef>No records found.</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <ng-template [ngIf]="dataSource.data.length === 0">
+                        <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr>
+                    </ng-template>
+                    <tr *ngIf="!dataSource">No records found</tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div *ngIf="inProgress" style="min-width: 100%;">
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                The system is searching, loading the records to be viewed...
+            </div>
+            <div *ngIf="inProgressAction" style="min-width: 100%;">
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                The system is processing your action...
+            </div>
+            <div *ngIf="hasError" style="min-width: 100%;">
+                Unable to load data from server. <br />
+                <button mat-raised-button color="primary" (click)="loadDataSource()">
+                    <mat-icon>refresh</mat-icon> Retry
+                </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

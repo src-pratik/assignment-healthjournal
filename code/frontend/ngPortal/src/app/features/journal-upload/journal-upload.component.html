@@ -1,0 +1,43 @@
+<div style="margin:50px;">
+    <mat-card style="width:100%;">
+        <mat-card-header>
+            <mat-card-title>Publish Edition : </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field style="width: 100%;">
+                            <mat-label>File</mat-label>
+                            <button mat-mini-fab color="primary" [disabled]="inProgress" matPrefix
+                                (click)="fileUpload.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <input type="text" readonly matInput [ngModel]="getFileName()" />
+                            <input type="file" single hidden #f_input #fileUpload (change)="onFileSelected($event)" />
+
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-toolbar-row>
+                <div *ngIf="inProgress" style="min-width: 100%;">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    The system is uploading file...
+                </div>
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+                <span style="flex: 1 1 auto"></span>
+                <button mat-raised-button color="primary" [disabled]="inProgress"
+                    (click)="onUploadClick($event)"><mat-icon>cloud_upload</mat-icon> Upload</button>
+                <span style="margin-left: 15px;"></span>
+                <button mat-raised-button color="primary"  [disabled]="inProgress" (click)="onBackClick()">
+                    <mat-icon>arrow_back</mat-icon> Back
+                </button>
+            </mat-toolbar-row>
+        </mat-card-actions>
+    </mat-card>
+</div>

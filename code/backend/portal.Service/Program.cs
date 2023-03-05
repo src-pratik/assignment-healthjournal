@@ -83,6 +83,13 @@ namespace portal.Service
                 IdentitySeed.Seed(userManager, roleManager);
             }
 
+            app.UseCors(x =>
+            {
+                x.AllowAnyHeader();
+                x.AllowAnyOrigin();
+                x.AllowAnyMethod();
+            });
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
