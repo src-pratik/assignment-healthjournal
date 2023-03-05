@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -6,6 +7,7 @@ using portal.Domain;
 using portal.IO.Provider;
 using portal.Security;
 using portal.Security.Identity;
+using System.Reflection;
 using System.Text;
 
 namespace portal.Service
@@ -71,7 +73,7 @@ namespace portal.Service
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options => options.IncludeXmlComments(XmlCommentsFilePath));
 
             var app = builder.Build();
 
@@ -106,6 +108,16 @@ namespace portal.Service
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static string XmlCommentsFilePath
+        {
+            get
+            {
+                var xmlFile = $"portal.WebAPI.XML";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                return xmlPath;
+            }
         }
     }
 }
