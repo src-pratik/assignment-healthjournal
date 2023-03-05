@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using portal.Domain;
-using portal.IO.Provider;
+using portal.IO;
 using portal.Security;
 using portal.Security.Identity;
 using System.Reflection;
@@ -80,6 +80,9 @@ namespace portal.Service
             //This should be wrapped up in only testing environment non prod.
             using (var scope = app.Services.CreateScope())
             {
+                scope.ServiceProvider.GetRequiredService<PortalDbContext>()?.Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<SecurityDbContext>()?.Database.Migrate();
+
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
                 IdentitySeed.Seed(userManager, roleManager);

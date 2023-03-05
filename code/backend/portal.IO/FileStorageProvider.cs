@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using portal.IO;
 
-namespace portal.IO.Provider
+namespace portal.IO
 {
     public class FileStorageProvider : IStorageProvider
     {

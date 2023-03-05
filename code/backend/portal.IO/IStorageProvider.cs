@@ -1,4 +1,7 @@
-﻿namespace portal.IO
+﻿using System;
+using System.IO;
+
+namespace portal.IO
 {
     public interface IStorageProvider
     {

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portal.IO.Common", "portal.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portal.UnitTest", "portal.UnitTest\portal.UnitTest.csproj", "{1F76549C-DC2F-468F-8B2A-6C5D48686D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portal.IO", "portal.IO.Provider.FileStorage\portal.IO.csproj", "{40EEC282-E752-4E4E-BB5D-2ABD90C0CDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portal.IO", "portal.IO\portal.IO.csproj", "{40EEC282-E752-4E4E-BB5D-2ABD90C0CDD4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "portal.Security", "portal.Security\portal.Security.csproj", "{B3F6CACA-DF0E-4FA8-967A-2C729BFA9DE6}"
 EndProject
