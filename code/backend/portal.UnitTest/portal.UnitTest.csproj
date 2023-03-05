@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\portal.IO.Common\portal.IO.Common.csproj" />
     <ProjectReference Include="..\portal.IO.Provider.FileStorage\portal.IO.csproj" />
+    <ProjectReference Include="..\portal.Security\portal.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>
