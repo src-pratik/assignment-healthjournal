@@ -2,13 +2,13 @@
 {
     public static class Extensions
     {
-        public static DataTransferObjects.Journal ToDTO(this Domain.Entities.Journal journal) => new DataTransferObjects.Journal
+        public static DataTransferObjects.JournalDto ToDTO(this Domain.Entities.Journal journal) => new DataTransferObjects.JournalDto
         {
             Id = journal.Id,
             Name = journal.Name
         };
 
-        public static Domain.Entities.Journal FromDTO(this DataTransferObjects.Journal dto) => new Domain.Entities.Journal
+        public static Domain.Entities.Journal FromDTO(this DataTransferObjects.JournalDto dto) => new Domain.Entities.Journal
         {
             Id = dto.Id,
             Name = dto.Name

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace portal.WebAPI.DataTransferObjects
 {
-    public class JournalDetails : Journal
+    public class JournalDetails : JournalDto
     {
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

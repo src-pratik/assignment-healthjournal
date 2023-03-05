@@ -7,8 +7,6 @@ using portal.Domain;
 using portal.Security.Identity;
 using portal.WebAPI.DataTransferObjects;
 using System.Data;
-using System.Net.Http;
-using System.Runtime.InteropServices;
 
 namespace portal.WebAPI.Controllers
 {
@@ -40,7 +38,7 @@ namespace portal.WebAPI.Controllers
         /// <response code="400">If a journal with the same name already exists.</response>
         [Authorize(Roles = nameof(Constants.Roles.Publisher))]
         [HttpPost]
-        public async Task<IActionResult> PostJournal(DataTransferObjects.Journal journalDTO)
+        public async Task<IActionResult> PostJournal(DataTransferObjects.JournalDto journalDTO)
         {
             var userId = UserId;
 
@@ -157,7 +155,7 @@ namespace portal.WebAPI.Controllers
         /// <returns>A list of published Journals</returns>
         /// <response code="200">Returns the list of published Journals</response>
         /// <response code="401">If the user is not authenticated or does not have the 'Publisher' role</response>
-        [Authorize(Roles = "Publisher")]
+        [Authorize(Roles = nameof(Constants.Roles.Publisher))]
         [HttpGet("published")]
         public async Task<ActionResult<IEnumerable<JournalDetails>>> GetPublishedJournals()
         {
@@ -198,7 +196,7 @@ namespace portal.WebAPI.Controllers
         /// <response code="404">If a Journal with the requested ID is not found</response>
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<DataTransferObjects.Journal>> GetJournal(Guid? id)
+        public async Task<ActionResult<DataTransferObjects.JournalDto>> GetJournal(Guid? id)
         {
             var journal = await _context.Journals.FindAsync(id);
 
