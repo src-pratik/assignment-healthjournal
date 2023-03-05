@@ -2,7 +2,7 @@
 Assumptions 
 ==========================================================================================================
 1. User Mangement is not available in system, i.e there is no user interface built for creating or updating users.
-
+2. ASP net Identity is used for user management, its database ERD is not explained.
 
 ==========================================================================================================
 Frameworks/Dependency/Dev tools
