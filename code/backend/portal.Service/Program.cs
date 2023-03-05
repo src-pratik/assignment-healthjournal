@@ -1,3 +1,5 @@
+using portal.IO.Provider;
+
 namespace portal.Service
 {
     public class Program
@@ -13,6 +15,13 @@ namespace portal.Service
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Added IStorageProvider Service
+            var fileStorageFolderPath = builder.Configuration["FileStorageProvider:Path"];
+            builder.Services.AddSingleton<IStorageProvider>(x =>
+            {
+                return new FileStorageProvider(fileStorageFolderPath);
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +34,6 @@ namespace portal.Service
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

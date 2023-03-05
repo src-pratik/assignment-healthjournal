@@ -14,4 +14,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\portal.IO.Provider.FileStorage\portal.IO.csproj" />
+  </ItemGroup>
+
 </Project>
