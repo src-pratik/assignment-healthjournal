@@ -20,5 +20,6 @@
     <ProjectReference Include="..\portal.Domain\portal.Domain.csproj" />
     <ProjectReference Include="..\portal.IO.Provider.FileStorage\portal.IO.csproj" />
     <ProjectReference Include="..\portal.Security.Identity\portal.Security.Identity.csproj" />
+    <ProjectReference Include="..\portal.WebAPI\portal.WebAPI.csproj" />
   </ItemGroup>
 </Project>
