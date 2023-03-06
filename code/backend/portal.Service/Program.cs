@@ -7,6 +7,7 @@ using portal.Domain;
 using portal.IO;
 using portal.Security;
 using portal.Security.Identity;
+using System;
 using System.Reflection;
 using System.Text;
 
@@ -80,8 +81,17 @@ namespace portal.Service
             //This should be wrapped up in only testing environment non prod.
             using (var scope = app.Services.CreateScope())
             {
-                scope.ServiceProvider.GetRequiredService<PortalDbContext>()?.Database.Migrate();
-                scope.ServiceProvider.GetRequiredService<SecurityDbContext>()?.Database.Migrate();
+                var portalContext = scope.ServiceProvider.GetRequiredService<PortalDbContext>();
+                var securityContext = scope.ServiceProvider.GetRequiredService<SecurityDbContext>();
+
+                if (portalContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+                {
+                    portalContext.Database.Migrate();
+                }
+                if (securityContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+                {
+                    securityContext.Database.Migrate();
+                }
 
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
